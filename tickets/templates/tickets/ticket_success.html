@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Заявка создана успешно!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Подключаем наш кастомный CSS для страницы успеха -->
+    <link rel="stylesheet" href="{% static 'tickets/css/success.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="success-box">
+            <h1>Заявка успешно создана!</h1>
+            <p>Ваша заявка принята и будет обработана в ближайшее время.</p>
+            <a class="btn" href="/tickets/create/">Создать новую заявку</a>
+        </div>
+    </div>
+</body>
+</html>

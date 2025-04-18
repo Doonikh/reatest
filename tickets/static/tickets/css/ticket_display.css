@@ -1,0 +1,106 @@
+/* Общие стили */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #3f3838;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Статистика */
+.statistics {
+    display: flex;
+    justify-content: center;
+    font-size: 34px;
+}
+
+/* Таблица */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table thead th {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+table tbody td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    thead tr {
+        display: none;
+    }
+    tbody tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+    }
+    tbody td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+    }
+    tbody td:before {
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+    tbody td:nth-of-type(1):before { content: "Номер"; }
+    tbody td:nth-of-type(2):before { content: "Дата создания"; }
+    tbody td:nth-of-type(3):before { content: "Расположение"; }
+    tbody td:nth-of-type(4):before { content: "Суть задачи"; }
+    tbody td:nth-of-type(5):before { content: "Контакт"; }
+    tbody td:nth-of-type(6):before { content: "Статус"; }
+    tbody td:nth-of-type(7):before { content: "Исполнитель"; }
+    tbody td:nth-of-type(8):before { content: "Прикрепленные фото"; }
+}
+
+#current-datetime {
+    font-size: 32px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background-color: #3f3838; /* Тёмный полупрозрачный фон */
+    margin-left: 30px;
+}
+
+.btn-back {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-back:hover {
+    background-color: #0056b3;
+}
+

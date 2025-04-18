@@ -1,0 +1,71 @@
+{% load i18n %}
+<table>
+    <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Дата создания</th>
+            <th>Расположение</th>
+            <th>Суть задачи</th>
+            <th>Контакт</th>
+            <th>Статус</th>
+            <th>Исполнитель</th>
+            <th>Фото</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ticket in tickets %}
+        <tr style="background-color:
+            {% if ticket.status|lower == 'new' %}#ffe0e0
+            {% elif ticket.status|lower == 'in_progress' %}#faffc3
+            {% elif ticket.status|lower == 'closed' %}#e0ffe0
+            {% elif ticket.status|lower == 'denied' %}#a7d7ff
+            {% else %}transparent{% endif %}; color: #000000;">
+            <td>{{ ticket.pk }}</td>
+            <td>
+                {{ ticket.created_at|date:"d.m.Y" }}<br>
+                <span style="font-size:90%; color:#383838;">{{ ticket.created_at|date:"H:i" }}</span>
+            </td>
+            <td>
+                {{ ticket.building }}<br>
+                <span style="font-size:90%; color:#383838;">{{ ticket.office }}</span>
+            </td>
+            <td>{{ ticket.error_description }}</td>
+            <td>
+                {{ ticket.internal_phone }}<br>
+                <span style="font-size:90%; color:#383838;">{{ ticket.full_name }}</span>
+            </td>
+            <td>
+                {% if ticket.status|lower == 'new' %}
+                    Новая
+                {% elif ticket.status|lower == 'in_progress' %}
+                    В работе
+                {% elif ticket.status|lower == 'closed' %}
+                    Выполнено
+                {% elif ticket.status|lower == 'denied' %}
+                    Отклонена
+                {% else %}
+                    {{ ticket.status }}
+                {% endif %}
+            </td>
+            <td>
+                {% if ticket.done_by %}
+                    {{ ticket.done_by.get_full_name }}
+                {% else %}
+                    Не указано
+                {% endif %}
+            </td>
+            <td>
+                {% if ticket.images.all %}
+                    <a href="{% url 'public_ticket_images' ticket.pk %}" style="color: #66ccff;">Просмотр фото</a>
+                {% else %}
+                    Нет
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="8">Нет заявок</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,51 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список заявок</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Подключаем CSS для темного оформления -->
+    <link rel="stylesheet" href="{% static 'tickets/css/ticket_display.css' %}">
+    <script>
+        // Каждые 15 секунд перезагружаем страницу для обновления списка
+        setTimeout(function(){ location.reload(); }, 15000);
+
+        function updateTime() {
+            var now = new Date();
+            // Получаем дату и время в формате "день.месяц.год" и "часы:минуты:секунды"
+            var dateStr = now.toLocaleDateString('ru-RU');
+            var timeStr = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById("current-datetime").innerHTML = dateStr + " " + timeStr;
+        }
+
+        window.onload = function() {
+            updateTime();
+            setInterval(updateTime, 1000); // Обновляем каждую секунду (1000 мс)
+        };
+    </script>
+</head>
+<body>
+    <h1>Список заявок</h1>
+    <div class="stats-container" style="display: flex; justify-content: center; align-items: center; margin-bottom: 15px;">
+        <div class="statistics">
+            <span style="margin-right: 20px; color: #faffc3;">
+                В работе: {{ stats.in_progress }}
+            </span>
+            <span style="margin-right: 20px; color: #e0ffe0;">
+                Выполнено: {{ stats.closed }}
+            </span>
+            <span style="margin-right: 20px; color: #ffe0e0;">
+                Новая: {{ stats.new }}
+            </span>
+            <span style="color: #a7d7ff;">
+                Отклонена: {{ stats.denied }}
+            </span>
+        </div>
+        <div id="current-datetime" style="margin-left: 30px; font-size: 34px; color: #fff; font-weight: bold; text-align: center;">
+            <!-- Время будет обновляться каждую секунду -->
+        </div>
+    </div>
+    {% include "tickets/ticket_list_partial.html" %}
+</body>
+</html>
